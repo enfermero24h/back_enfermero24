@@ -19,7 +19,9 @@ return new class extends Migration
             $table->string('titulo');
             $table->text('descripcion');
             $table->decimal('precio', 10, 2);
-            $table->point('ubicacion')->nullable();
+            $table->string('direccion')->nullable();
+            $table->decimal('latitud', 10, 8)->nullable();
+            $table->decimal('longitud', 11, 8)->nullable();
             $table->json('disponibilidad')->nullable(); // Puedes usar JSON para almacenar horarios disponibles
             $table->unsignedBigInteger('estado_id');
             $table->timestamps();
@@ -38,4 +40,4 @@ return new class extends Migration
     {
         Schema::dropIfExists('servicios');
     }
-}
+};

@@ -19,10 +19,11 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->enum('rol', ['paciente', 'profesional']);
-            $table->string('telefono')->nullable();
+            $table->enum('rol', ['paciente', 'profesional','auxiliar','secretaria','administrador','superadmin']);
+            $table->string('telefono', 15)->nullable(); // Ajusta la longitud según sea necesario
             $table->string('direccion')->nullable();
-            $table->point('ubicacion')->nullable();
+            $table->decimal('latitud', 10, 8)->nullable();
+            $table->decimal('longitud', 11, 8)->nullable();
             $table->string('otp_code')->nullable();
             $table->unsignedBigInteger('estado_id');
             $table->rememberToken();
@@ -41,4 +42,4 @@ return new class extends Migration
     {
         Schema::dropIfExists('usuarios');
     }
-}
+};

@@ -18,7 +18,9 @@ return new class extends Migration
             $table->unsignedBigInteger('usuario_id');
             $table->string('titulo');
             $table->text('descripcion');
-            $table->point('ubicacion')->nullable();
+            $table->string('direccion')->nullable();
+            $table->decimal('latitud', 10, 8)->nullable();
+            $table->decimal('longitud', 11, 8)->nullable();
             $table->decimal('precio_ofrecido', 10, 2);
             $table->date('fecha_limite');
             $table->unsignedBigInteger('estado_id');
@@ -38,4 +40,4 @@ return new class extends Migration
     {
         Schema::dropIfExists('ofertas');
     }
-}
+};
