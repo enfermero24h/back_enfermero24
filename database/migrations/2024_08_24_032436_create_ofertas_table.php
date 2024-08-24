@@ -8,20 +8,34 @@ return new class extends Migration
 {
     /**
      * Run the migrations.
+     *
+     * @return void
      */
-    public function up(): void
+    public function up()
     {
         Schema::create('ofertas', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('usuario_id');
+            $table->string('titulo');
+            $table->text('descripcion');
+            $table->point('ubicacion')->nullable();
+            $table->decimal('precio_ofrecido', 10, 2);
+            $table->date('fecha_limite');
+            $table->unsignedBigInteger('estado_id');
             $table->timestamps();
+
+            $table->foreign('usuario_id')->references('id')->on('usuarios');
+            $table->foreign('estado_id')->references('id')->on('estados');
         });
     }
 
     /**
      * Reverse the migrations.
+     *
+     * @return void
      */
-    public function down(): void
+    public function down()
     {
         Schema::dropIfExists('ofertas');
     }
-};
+}

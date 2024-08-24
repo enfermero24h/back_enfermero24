@@ -8,20 +8,32 @@ return new class extends Migration
 {
     /**
      * Run the migrations.
+     *
+     * @return void
      */
-    public function up(): void
+    public function up()
     {
         Schema::create('aplicaciones', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('usuario_id');
+            $table->unsignedBigInteger('oferta_id');
+            $table->unsignedBigInteger('estado_id');
+            $table->timestamp('fecha_aplicacion');
             $table->timestamps();
+
+            $table->foreign('usuario_id')->references('id')->on('usuarios');
+            $table->foreign('oferta_id')->references('id')->on('ofertas');
+            $table->foreign('estado_id')->references('id')->on('estados');
         });
     }
 
     /**
      * Reverse the migrations.
+     *
+     * @return void
      */
-    public function down(): void
+    public function down()
     {
         Schema::dropIfExists('aplicaciones');
     }
-};
+}

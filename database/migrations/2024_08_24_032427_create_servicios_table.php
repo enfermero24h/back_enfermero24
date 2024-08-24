@@ -8,20 +8,34 @@ return new class extends Migration
 {
     /**
      * Run the migrations.
+     *
+     * @return void
      */
-    public function up(): void
+    public function up()
     {
         Schema::create('servicios', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('usuario_id');
+            $table->string('titulo');
+            $table->text('descripcion');
+            $table->decimal('precio', 10, 2);
+            $table->point('ubicacion')->nullable();
+            $table->json('disponibilidad')->nullable(); // Puedes usar JSON para almacenar horarios disponibles
+            $table->unsignedBigInteger('estado_id');
             $table->timestamps();
+
+            $table->foreign('usuario_id')->references('id')->on('usuarios');
+            $table->foreign('estado_id')->references('id')->on('estados');
         });
     }
 
     /**
      * Reverse the migrations.
+     *
+     * @return void
      */
-    public function down(): void
+    public function down()
     {
         Schema::dropIfExists('servicios');
     }
-};
+}
